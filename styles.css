@@ -649,6 +649,19 @@ html.presenter .ask-q { font-size: clamp(1.6rem, 1.1rem + 1.4vw, 2.4rem); }
 html.presenter .fb .fb-text, html.presenter .caption .move-line { font-size: 1.15rem; }
 html.presenter .crumb { font-size: 1.05rem; opacity: 1; }
 
+/* ---------- Outside presenter mode: one Back / Next bar drives everything ---------- */
+.deckbar {
+  position: fixed; z-index: 30; left: 50%; transform: translateX(-50%); bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  display: flex; gap: 8px; padding: 6px; border-radius: 999px; background: var(--sheet); border: 1px solid var(--rule); box-shadow: var(--shadow);
+}
+.deckbar .btn { border-radius: 999px; min-height: 48px; }
+.deckbar .next { min-width: 9em; justify-content: center; }
+html.step-ready .deckbar .next, html.beat-wait .deckbar .next { animation: ready-glow 2.4s ease-in-out infinite; }
+html.presenter .deckbar { display: none; }
+html:not(.presenter) .panel-nav, html:not(.presenter) .fb-actions, html:not(.presenter) .ask-row, html:not(.presenter) .ch-controls,
+html:not(.presenter) #toolbar { display: none; }
+html:not(.presenter) .stage { padding-bottom: 96px; }
+
 /* ---------- Step changes fade in ---------- */
 .step-enter { animation: step-enter 0.35s ease-out backwards; }
 #pieces.step-enter, #statusbar.step-enter { animation-name: fade-in; }

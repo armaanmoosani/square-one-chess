@@ -64,7 +64,7 @@
     /* ---------------- Before you play ---------------- */
     {
       id: 'overview', part: 'before',
-      steps: [{ id: 'map', label: 'step.overview', kind: 'overview', fen: START, mode: 'rules', text: ['overview.intro'] }],
+      steps: [{ id: 'map', label: 'step.overview', kind: 'info', fen: START, mode: 'look', text: ['overview.intro'] }],
     },
     {
       id: 'equipment', part: 'before',
@@ -194,7 +194,7 @@
       id: 'turns', part: 'moving',
       steps: [{
         id: 'try', label: 'step.try', kind: 'play', mode: 'rules', sides: 'both', fen: START,
-        text: ['pieces.together', 'turns.body'],
+        text: ['turns.body', 'pieces.together'],
         goal: { type: 'plies', count: 4 },
         auto: [{ attempt: 'e7e5' }, { move: 'e2e4' }, { attempt: 'd2d4' }, { move: 'e7e5' }, { move: 'g1f3' }, { move: 'b8c6' }],
       }],
@@ -222,9 +222,9 @@
           frames: [
             { label: 'frame.blackToMove', caption: 'check.demo.1' },
             { move: 'a8e8', label: 'frame.check', caption: 'check.demo.2' },
-            { label: 'frame.way.king', caption: 'check.ways.king', show: 'king', ask: 'ask.checkWays' },
-            { label: 'frame.way.block', caption: 'check.ways.block', show: 'block' },
-            { label: 'frame.way.capture', caption: 'check.ways.capture', show: 'capture' },
+            { label: 'frame.way.king', show: 'king', ask: 'ask.checkWays' },
+            { label: 'frame.way.block', show: 'block' },
+            { label: 'frame.way.capture', show: 'capture' },
           ],
         },
         {
@@ -369,6 +369,7 @@
     {
       id: 'play', part: 'play',
       steps: [
+        { id: 'steps', label: 'step.steps', kind: 'overview', fen: START, mode: 'rules' },
         {
           id: 'board', label: 'step.play', kind: 'play', mode: 'rules', sides: 'both', sandbox: true, fen: START, text: ['play.body'], prompt: 'prompt.play',
           auto: [{ select: 'e2' }, { move: 'e2e4' }, { move: 'e7e5' }],
@@ -408,10 +409,10 @@
   root.SQ1 = root.SQ1 || {};
   /* The 15-minute talk: the one step per topic that → visits while presenting (the rest stay reachable with Go to). */
   const TALK_ROUTE = [
-    'overview/map', 'equipment/kit', 'setup/orient', 'setup/watch',
+    'overview/map', 'equipment/kit', 'setup/orient', 'setup/squares', 'setup/watch',
     'rook/watch', 'bishop/explore', 'queen/explore', 'king/explore', 'knight/explore', 'pawn/watch', 'turns/try',
     'goal/watch', 'check/watch', 'check/three', 'checkmate/watch', 'draws/watch', 'draws/other',
-    'promotion/watch', 'castling/watch', 'enpassant/watch', 'play/board',
+    'promotion/watch', 'castling/watch', 'enpassant/watch', 'play/steps', 'play/board',
   ];
 
   root.SQ1.Curriculum = { START, PARTS, PROCEDURE, LESSONS, CHALLENGE, TALK_ROUTE };

@@ -163,9 +163,10 @@
     const entry = TEXT[id];
     if (!entry) return null;
     if (hasText(id)) return h('div', { class: 'prose', html: md(entry.text) });
-    if (entry.optional && !settings.missing) return null;
-    return h('div', { class: 'placeholder' + (entry.optional ? ' optional' : '') },
-      h('p', { class: 'ph-label' }, icon('pen'), ui(entry.optional ? 'placeholder.optional' : 'placeholder.label'), h('code', null, id)),
+    // Optional captions and extras simply don't appear until someone writes them.
+    if (entry.optional) return null;
+    return h('div', { class: 'placeholder' },
+      h('p', { class: 'ph-label' }, icon('pen'), ui('placeholder.label'), h('code', null, id)),
       h('p', { class: 'ph-brief' }, entry.brief),
       entry.length ? h('p', { class: 'ph-length' }, entry.length) : null);
   }
@@ -1822,7 +1823,6 @@
               textBlock(d.text),
               h('a', { href: '#' + d.go, class: 'linkish' }, ui('proc.open') + ': ' + ui('lesson.' + d.go)))))) : null,
           h('a', { href: '#' + p.go, class: 'linkish' }, ui('proc.open') + ': ' + ui('lesson.' + p.go))));
-      const first = LESSONS[1];
       return [
         ...this.textNodes(),
         h('section', { 'aria-labelledby': 'proc-title' },
@@ -1831,7 +1831,6 @@
         h('div', { class: 'legend-box' },
           h('p', null, ui('proc.legend')),
           h('ul', null, ['order', 'repeat', 'if', 'optional', 'required'].map((t) => h('li', null, tagNode(t), ' ', ui('proc.tag.' + t + '.desc'))))),
-        h('a', { class: 'btn primary proc-start', href: '#' + first.id }, ui('proc.start', { title: ui('lesson.' + first.id) }), icon('arrowRight')),
       ];
     }
   }
@@ -1869,12 +1868,11 @@
     panel() {
       const kitKey = 'kit';
       const have = store.get(kitKey, {});
-      const items = [['board', 'required'], ['pieces', 'required'], ['opponent', 'required']];
-      const kit = h('ul', { class: 'kit' }, items.map(([id, need]) => {
+      const items = ['board', 'pieces', 'opponent'];
+      const kit = h('ul', { class: 'kit' }, items.map((id) => {
         const box = h('input', { type: 'checkbox', id: 'kit-' + id, checked: have[id] ? true : null, onchange: (e) => { have[id] = e.target.checked; store.set(kitKey, have); } });
         return h('li', null, h('label', { for: 'kit-' + id }, box,
-          h('span', null, h('span', { class: 'kit-name' }, ui('kit.' + id)), h('span', { class: 'kit-detail' }, ui('kit.' + id + '.detail'))),
-          h('span', { class: 'tag ' + (need === 'required' ? 'required' : 'optional') }, ui('kit.' + need))));
+          h('span', null, h('span', { class: 'kit-name' }, ui('kit.' + id)), h('span', { class: 'kit-detail' }, ui('kit.' + id + '.detail')))));
       }));
       const counts = { k: 1, q: 1, r: 2, b: 2, n: 2, p: 8 };
       this.invButtons = [];
@@ -2634,7 +2632,7 @@
       }
       const list = h('ul', { class: 'ch-results' }, items.map((it) => h('li', { class: it.ok ? 'ok' : 'no' }, icon(it.ok ? 'check' : 'x'),
         h('span', null, it.text, it.play ? h('span', null, ' ', h('button', { type: 'button', class: 'linkish', onclick: () => this.playOption(it.play) }, ui('ch.showMe'))) : null))));
-      this.resultsEl.replaceChildren(...[list, textBlock(q.explain), q.reveal === 'castle' ? castleWidget(pos, 'w') : null].filter(Boolean));
+      this.resultsEl.replaceChildren(...[hasText(q.explain) ? null : list, textBlock(q.explain), q.reveal === 'castle' ? castleWidget(pos, 'w') : null].filter(Boolean));
       followWidget(this.resultsEl);
     }
 
@@ -3491,7 +3489,7 @@
         h('input', { type: 'radio', name, id: 'set-' + name + '-' + value, value, checked: settings[name] === value ? true : null, onchange: () => { settings[name] = value; saveSettings(); if (name === 'route') rerender(); } }),
         h('span', null, label)))));
     const check = (name, label) => h('label', { class: 'check-row', for: 'set-' + name },
-      h('input', { type: 'checkbox', id: 'set-' + name, checked: settings[name] ? true : null, onchange: (e) => { settings[name] = e.target.checked; saveSettings(); if (name === 'missing') rerender(); } }),
+      h('input', { type: 'checkbox', id: 'set-' + name, checked: settings[name] ? true : null, onchange: (e) => { settings[name] = e.target.checked; saveSettings(); } }),
       h('span', null, label));
     const resetMsg = h('p', { class: 'notice', role: 'status' });
     body.replaceChildren(
@@ -3503,7 +3501,6 @@
       check('large', ui('set.large')),
       check('letters', ui('set.letters')),
       check('coords', ui('set.coords')),
-      check('missing', ui('set.missing')),
       h('div', null, h('button', { type: 'button', class: 'btn', onclick: () => {
         Object.keys(progress).forEach((k) => delete progress[k]);
         store.set('progress', progress);
@@ -3640,6 +3637,10 @@
     document.querySelectorAll('dialog [data-close]').forEach((b) => b.addEventListener('click', () => b.closest('dialog').close()));
     // A click outside a dialog closes it, except that during a demonstration's promotion it takes the highlighted piece (as → does).
     document.querySelectorAll('dialog').forEach((d) => d.addEventListener('click', (e) => { if (e.target === d && !(d.id === 'promo-dialog' && Promo.skip())) d.close(); }));
+    // Outside presenter mode (phones, narrow windows) one Next button drives everything, exactly like →.
+    document.body.append(h('nav', { class: 'deckbar', id: 'deckbar', 'aria-label': ui('nav.lessons') },
+      h('button', { type: 'button', class: 'btn', onclick: () => step(-1), 'aria-label': ui('nav.prev'), title: ui('nav.prev') }, icon('arrowLeft')),
+      h('button', { type: 'button', class: 'btn primary next', onclick: () => presenterNext(false) }, ui('nav.next'), icon('arrowRight'))));
     document.addEventListener('keydown', onGlobalKey);
     window.addEventListener('hashchange', route);
     route();
