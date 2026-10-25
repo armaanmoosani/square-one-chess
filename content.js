@@ -220,7 +220,7 @@ window.SQ1_UI = {
   'kit.board': 'Chessboard',
   'kit.board.detail': '8 × 8 = 64 squares',
   'kit.pieces': 'Chess pieces',
-  'kit.pieces.detail': '32 pieces, 16 per side',
+  'kit.pieces.detail': '32 pieces, 16 for each player',
   'kit.opponent': 'An opponent',
   'kit.opponent.detail': 'Or play both sides to practice',
   'kit.count.title': 'Each player starts with',

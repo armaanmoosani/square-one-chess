@@ -1772,7 +1772,6 @@
     mount() {
       this.step = Object.assign({}, this.step, { sides: 'both', prompt: 'proc.try' });
       super.mount();
-      this.complete();
     }
     /** Walk through the procedure, playing the first moves on the board as it goes. */
     async demonstrate(run) {
@@ -1803,6 +1802,7 @@
       } finally {
         items.forEach((el) => { if (el !== keep) el.classList.remove('spot'); });
       }
+      this.complete();   // ticked once the walkthrough has reached its last item
     }
     selectActions(p) {
       const L = LESSONS.find((l) => l.piece === E.typeOf(p));
@@ -2989,6 +2989,7 @@
       b.setAttribute('aria-label', label);
       b.title = label + ' (Space)';
       b.dataset.state = state;
+      b.hidden = !(App.ctrl && App.ctrl.demonstrate);   // nothing to demonstrate on this screen
     });
     document.querySelectorAll('[data-demo-stop]').forEach((b) => { b.hidden = !r; });
   }
@@ -3019,6 +3020,7 @@
   const goChallenge = (i) => goTo('challenge-' + (Math.max(0, Math.min(CHALLENGE.length - 1, i)) + 1));
 
   function teardown() {
+    hidePartCard();   // a new step never opens under the previous step's card
     App.followed = null;
     clearTimeout(keepFollowing.t);
     Run.stop();
