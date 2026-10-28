@@ -8,7 +8,7 @@
  * home squares (e1, h1, a1, e8, h8, a8). That lets the castling checklist say
  * exactly which condition fails instead of only "castling not allowed".
  *
- * Verified against standard perft counts (see README, "Chess accuracy").
+ * Verified against standard perft counts.
  */
 (function (root) {
   'use strict';

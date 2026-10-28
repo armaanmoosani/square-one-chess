@@ -1,8 +1,7 @@
 /* Square One — curriculum structure.
  *
  * Positions, demonstrations, goals, automatic demonstrations and challenge
- * questions. Text lives in content.js; entries here refer to it by key. Every
- * position and script is checked by tests/validate-lessons.js.
+ * questions. Text lives in content.js; entries here refer to it by key.
  *
  * Step kinds:
  *   overview, equipment  front-door views
