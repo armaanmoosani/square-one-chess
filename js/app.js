@@ -1840,7 +1840,8 @@
     mount() {
       this.pos = E.parseFEN(this.step.fen);
       this.selected = null;
-      this.highlight = [];
+      this.named = (this.step.highlight || []).map(E.index);
+      this.highlight = this.named.slice();
       App.board.setPosition(this.pos, { animate: false });
       setToolbar([]);
       this.render();
@@ -1850,6 +1851,7 @@
     activate(s) {
       const p = this.pos.board[s];
       this.highlight = [];
+      this.named = [];
       if (!p) { this.selected = null; this.render(); return; }
       this.selected = s;
       Feedback.say(ui('fb.select', { Side: sideName(E.colorOf(p)), piece: pieceName(p), square: N(s) }), 'info');
@@ -1857,7 +1859,9 @@
     }
     cancel() { if (this.selected == null) return false; this.selected = null; this.render(); return true; }
     render() {
-      App.board.setMarks({ selected: this.selected, highlight: this.highlight });
+      const o = new Overlay();
+      (this.named || []).forEach((s) => o.name(s));
+      App.board.setMarks({ selected: this.selected, highlight: this.highlight, overlay: o.svg() });
       const st = bothKings(this.pos) ? E.status(this.pos) : null;
       renderStatus({ mode: 'look', st });
     }
@@ -2187,81 +2191,6 @@
     }
   }
 
-  /* ----- Name the squares ----- */
-  class FindCtrl extends Ctrl {
-    mount() {
-      this.pos = E.parseFEN(this.step.fen);
-      App.board.setPosition(this.pos, { animate: false });
-      this.task = taskCard();
-      this.labelsBtn = toolButton({ icon: 'eye', label: ui('tool.coords'), pressed: false, keep: true, run: () => this.toggleLabels() });
-      setToolbar([toolButton({ icon: 'reset', label: ui('goal.find.again'), run: () => this.start() }), this.labelsBtn]);
-      renderStatus({ mode: 'look' });
-      this.start();
-    }
-    toggleLabels() {
-      App.hideCoords = !App.hideCoords;
-      setPressed(this.labelsBtn, App.hideCoords);
-      applySettings();
-    }
-    start() {
-      this.k = 0;
-      this.score = 0;
-      this.firstTry = true;
-      this.good = [];
-      this.bad = null;
-      this.finished = false;
-      this.ask();
-    }
-    target() { return this.step.targets[this.k]; }
-    async demonstrate(run) {
-      this.start();
-      for (const [i, t] of this.step.targets.entries()) {
-        await pause(run, 1400, i > 0);
-        this.activate(E.index(t));
-      }
-      await settle(run, 900);
-    }
-    ask() {
-      Feedback.say(ui('prompt.findSquare', { square: this.target() }), 'info');
-      this.render();
-    }
-    panel() { return [...this.textNodes(), this.task.el]; }
-    activate(s) {
-      if (this.finished) return;
-      const t = E.index(this.target());
-      if (s === t) {
-        if (this.firstTry) this.score++;
-        this.good = [s];
-        this.bad = null;
-        this.k++;
-        this.firstTry = true;
-        if (this.k >= this.step.targets.length) {
-          this.finished = true;
-          Feedback.say(ui('goal.find.done', { score: this.score, total: this.step.targets.length }), 'success', { actions: this.nextAction() });
-          celebrate(s);
-          this.complete();
-          this.render();
-          return;
-        }
-        Feedback.say(ui('goal.find.right', { square: N(s) }), 'success', { sub: ui('prompt.findSquare', { square: this.target() }) });
-      } else {
-        this.firstTry = false;
-        this.bad = s;
-        Feedback.say(ui('goal.find.wrong', { clicked: N(s), square: this.target() }), 'error');
-      }
-      this.render();
-    }
-    cancel() { return false; }
-    render() {
-      const o = new Overlay();
-      if (this.bad != null) o.name(this.bad);
-      this.good.forEach((s) => o.name(s));
-      App.board.setMarks({ good: this.good, bad: this.bad != null ? [this.bad] : [], overlay: o.svg() });
-      this.task.set(this.finished ? '' : ui('prompt.findSquare', { square: this.target() }), ui('goal.find.progress', { n: Math.min(this.k + (this.finished ? 0 : 1), this.step.targets.length), total: this.step.targets.length, score: this.score }), this.finished);
-    }
-    unmount() { super.unmount(); App.hideCoords = false; applySettings(); }
-  }
-
   /* ----- Spot the setup mistakes ----- */
   class SpotCtrl extends Ctrl {
     mount() {
@@ -2498,7 +2427,7 @@
 
   const CONTROLLERS = {
     overview: OverviewCtrl, equipment: EquipmentCtrl, demo: DemoCtrl, play: PlayCtrl, rotate: RotateCtrl,
-    find: FindCtrl, spot: SpotCtrl, classify: ClassifyCtrl, info: InfoCtrl,
+    spot: SpotCtrl, classify: ClassifyCtrl, info: InfoCtrl,
   };
 
   /* =====================================================================

@@ -75,8 +75,8 @@
       steps: [
         { id: 'orient', label: 'step.orient', kind: 'rotate', text: ['board.orientation'], caution: 'board.caution', prompt: 'prompt.rotate' },
         {
-          id: 'squares', label: 'step.squares', kind: 'find', mode: 'look', fen: '8/8/8/8/8/8/8/8 w - - 0 1',
-          text: ['board.squares'], targets: ['e4', 'a1', 'h8', 'c6', 'f3'],
+          id: 'squares', label: 'step.squares', kind: 'info', mode: 'look', fen: '8/8/8/8/8/8/8/8 w - - 0 1',
+          text: ['board.squares'], highlight: ['e4'],
         },
         {
           id: 'watch', label: 'step.watch', kind: 'demo', mode: 'free', fen: '8/8/8/8/8/8/8/8 w - - 0 1',

@@ -182,7 +182,7 @@ window.SQ1_UI = {
   'step.explore': 'Explore',
   'step.try': 'Try',
   'step.orient': 'Place the board',
-  'step.squares': 'Name the squares',
+  'step.squares': 'How squares are named',
   'step.fix': 'Spot the mistakes',
   'step.three': 'Three ways out',
   'step.safe': 'Find safety',
@@ -229,7 +229,6 @@ window.SQ1_UI = {
 
   // Task prompts
   'prompt.rotate': 'Turn the board so the bottom-right corner is a light square.',
-  'prompt.findSquare': 'Find square {square}.',
   'prompt.fix': 'This setup has 3 mistakes. Can you spot them?',
   'prompt.turns.0': 'White makes the first move.',
   'prompt.turns.1': 'Then it is Black’s turn.',
@@ -296,8 +295,6 @@ window.SQ1_UI = {
   'tool.turnLeft': 'Turn left',
   'tool.turnRight': 'Turn right',
   'tool.showAnswer': 'Show answer',
-  'tool.coords': 'Hide labels',
-  'tool.coords.show': 'Show labels',
 
   // Navigation and chrome
   'nav.lessons': 'Lessons',
@@ -445,10 +442,6 @@ window.SQ1_UI = {
   'goal.complete': 'Practice complete',
   'goal.rotate.dark': 'The bottom-right corner is dark, so the board is turned the wrong way.',
   'goal.rotate.done': 'Light square on the right, so the board is set up correctly.',
-  'goal.find.right': 'Yes, that’s {square}.',
-  'goal.find.wrong': 'That’s {clicked}. Look for {square}.',
-  'goal.find.done': 'All {total} squares found.',
-  'goal.find.again': 'Play again',
   'goal.fix.found': 'Fixed: {what}. {left} left.',
   'goal.fix.correct': 'That piece is in the right place.',
   'goal.fix.done': 'All three mistakes are fixed. This is how the board should look at the start.',
@@ -668,7 +661,6 @@ window.SQ1_UI = {
   'goal.rotate.corner': 'Bottom-right corner: {shade}',
   'goal.rotate.light': 'light',
   'goal.rotate.darkWord': 'dark',
-  'goal.find.progress': 'Square {n} of {total}',
   'goal.fix.progress': 'Mistakes fixed: {n} of {total}',
   'goal.classify.progress': 'Position {n} of {total}',
   'classify.mate': 'Checkmate',
