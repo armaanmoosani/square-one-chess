@@ -31,14 +31,6 @@ window.SQ1_TEXT = {
 
   /* ---------- Start here ---------- */
   'overview.intro': { brief: 'Welcome the learner and say what they will be able to do by the end of the guide.', length: '1–2 sentences', text: 'Chess is a competitive two player strategy board game. Each player is the leader of an “army” consisting of 16 pieces: 8 pawns, 2 rooks, 2 bishops, 2 knights, a queen and a king. The arrangement of these pieces and the ways they move can be seen on the board. One player plays with the 16 white pieces and the other player plays with the 16 black pieces. The players take turns moving one piece at a time, with the goal of checkmating (this term is explained later) the opposing player’s king. You cannot move your piece to a square where a friendly piece is positioned. If a piece moves to a square where an enemy piece is currently positioned, then the enemy piece is captured i.e. it is placed off to the side and removed from the game for the rest of play.' },
-  'proc.equipment': { drafted: true, brief: 'What does a player need before starting? Summarize; the Equipment lesson has the detail.', length: '1 sentence', text: 'You need a chessboard, a set of 32 pieces and someone to play against.' },
-  'proc.setup': { drafted: true, brief: 'How is the board placed, and where do the pieces go? Summarize.', length: '1 sentence', text: 'Place the board so each player has a light square in their bottom-right corner, then put every piece on its starting square.' },
-  'proc.first': { drafted: true, brief: 'Which side moves first?', length: '1 short sentence', text: 'White always moves first.' },
-  'proc.turns': { drafted: true, brief: 'How do turns work? Say what counts as one move and whether a player may skip a turn.', length: '1 sentence', text: 'Players take turns making one move each, and nobody can skip a turn.' },
-  'proc.check': { drafted: true, brief: 'What must a player do when their own king is in check? Say whether anything else may be done first.', length: '1 sentence', text: 'If your king is in check, you have to get it out of check before doing anything else.' },
-  'proc.promote': { drafted: true, brief: 'What happens when a pawn reaches the far side? Make clear whether promoting is a choice.', length: '1 sentence', text: 'A pawn that reaches the far side must become a queen, rook, bishop or knight, and you choose which.' },
-  'proc.special': { drafted: true, brief: 'When may a player castle or capture en passant, and is a player ever forced to?', length: '1 sentence', text: 'You can castle or capture en passant when the rules allow it, but you never have to.' },
-  'proc.end': { drafted: true, brief: 'How does a game end? Name the way to win and the general idea of a draw.', length: '1 sentence', text: 'The game ends when a king is checkmated, when a player resigns, or in a draw.' },
 
   /* ---------- What you need ---------- */
   'equipment.body': { drafted: true, brief: 'List what is needed to play: the board, the pieces (how many per side) and an opponent.', length: '2–3 sentences', text: 'To play chess you need a board with 64 squares, the 32 pieces (16 for each player), and someone to play against.' },
@@ -129,8 +121,6 @@ window.SQ1_TEXT = {
   'ep.demo.1': { optional: true, brief: 'Caption: Black is about to move a pawn two squares.', length: '1 sentence', text: '' },
   'ep.demo.2': { optional: true, brief: 'Caption: the black pawn landed beside White’s pawn. What can White do right now?', length: '1 sentence', text: '' },
 
-  /* ---------- Your first game ---------- */
-  'play.body': { drafted: true, brief: 'Encourage the learner to play a first game here or on a real board, and explain that this board lets two people take turns on one device.', length: '2 sentences', text: 'Now you can try a real game, either on a chessboard or right here. Two people can take turns on this board, and it won\'t let anyone make an illegal move.' },
 
   /* ---------- Class challenge answer explanations ---------- */
   'challenge.q1': { drafted: true, brief: 'After the reveal: why only the knight can reach the star square.', length: '1–2 sentences', text: 'Only the knight can get there, since it can jump. The rook and the bishop are both blocked by White\'s own pawns, and the pawn can only move diagonally when it\'s capturing something.' },
@@ -151,7 +141,6 @@ window.SQ1_UI = {
   'part.moving': 'Moving and capturing',
   'part.safety': 'How a game ends',
   'part.special': 'Special moves',
-  'part.play': 'Play',
   'lesson.overview': 'Start here',
   'lesson.equipment': 'What you need',
   'lesson.goal': 'How to win',
@@ -169,7 +158,6 @@ window.SQ1_UI = {
   'lesson.promotion': 'Promotion',
   'lesson.castling': 'Castling',
   'lesson.enpassant': 'En passant',
-  'lesson.play': 'Your first game',
   'lesson.tag.optional': 'Optional',
   'lesson.tag.special.promotion': 'When it happens',
   'lesson.tag.special.castling': 'Optional move',
@@ -190,30 +178,9 @@ window.SQ1_UI = {
   'step.other': 'Other draws',
   'step.clear': 'Clear the path',
   'step.which': 'Which side?',
-  'step.play': 'Play',
-  'step.steps': 'Step by step',
   'step.rights': 'Lost rights',
 
   // Procedure overview (the "Start here" map)
-  'proc.title': 'Your first game, step by step',
-  'proc.tag.order': 'In order',
-  'proc.tag.repeat': 'Repeat',
-  'proc.tag.if': 'Only if',
-  'proc.tag.optional': 'Optional',
-  'proc.tag.required': 'Required',
-  'proc.step.equipment': 'Gather your equipment',
-  'proc.step.setup': 'Set up the board',
-  'proc.step.first': 'White makes the first move',
-  'proc.step.turns': 'Take turns, one move each',
-  'proc.step.check': 'Your king is in check',
-  'proc.step.promote': 'A pawn reaches the far side',
-  'proc.step.special': 'Castling or en passant is available',
-  'proc.step.end': 'The game ends',
-  'proc.during': 'During every turn',
-  'proc.open': 'Open lesson',
-  'proc.legend': 'How to read this list',
-  'proc.try': 'Here’s how a whole game goes, step by step.',
-  'proc.item': 'Step {n} of {total} · {title}',
 
   // Equipment
   'kit.title': 'Checklist',
@@ -245,7 +212,6 @@ window.SQ1_UI = {
   'prompt.castleClear': 'White wants to castle, but there are pieces in the way. Black just makes simple moves in the meantime.',
   'prompt.castleWhich': 'Can White castle kingside, queenside, or both? Watch the checklist.',
   'prompt.ep': 'Black’s pawn is about to jump two squares, landing beside White’s pawn. Watch what White can do.',
-  'prompt.play': 'A whole game on one board.',
   'prompt.info': '',
 
   // Board, status and modes
@@ -285,7 +251,6 @@ window.SQ1_UI = {
   'tool.danger.long': 'Show squares the other side attacks',
   'tool.lines': 'Lines',
   'tool.lines.long': 'Show movement lines',
-  'tool.flip': 'Flip',
   'tool.restart': 'Restart',
   'tool.back': 'Back',
   'tool.play': 'Play',
@@ -469,12 +434,6 @@ window.SQ1_UI = {
 
   // Sandbox
   'play.moves': 'Scoresheet',
-  'play.noMoves': 'No moves yet. White goes first.',
-  'play.newGame': 'New game',
-  'play.legal': 'Legal moves',
-  'play.over.mate': 'Checkmate · {Winner} wins',
-  'play.over.stalemate': 'Stalemate · Draw',
-  'play.over.material': 'Draw · Not enough pieces to checkmate',
 
   // Class challenge
   'ch.title': 'Quiz',
@@ -561,7 +520,7 @@ window.SQ1_UI = {
   'keys.draw': 'Draw mode (or right-drag on the board any time)',
   'keys.clear': 'Clear drawings',
   'keys.focus': 'Focus on the board',
-  'keys.parts': 'Jump to part 1–5',
+  'keys.parts': 'Jump to a part',
   'keys.vote': 'Pick an answer (quiz)',
   'keys.nav': 'Next move or next step (a clicker works too) / back',
   'keys.goto': 'Go to any lesson or example',
@@ -585,8 +544,6 @@ window.SQ1_UI = {
   'sq.danger': 'attacked by the other side',
   'fb.undone': 'Move taken back.',
   'fb.promote.capture': 'It also captures the {victim}.',
-  'tool.moves': 'Moves',
-  'play.flipped': 'Board flipped. {Side} is now at the bottom.',
   'legend.move': 'Can move here',
   'legend.capture': 'Can capture here',
   'legend.stop': 'Path blocked',
@@ -601,12 +558,6 @@ window.SQ1_UI = {
   'matrix.col.no': 'No legal move',
   'matrix.row.yes': 'In check',
   'matrix.row.no': 'Not in check',
-  'overview.learn': 'How the {piece} moves',
-  'proc.tag.order.desc': 'do these in sequence',
-  'proc.tag.repeat.desc': 'happens every turn until the game ends',
-  'proc.tag.if.desc': 'only when the situation arises',
-  'proc.tag.optional.desc': 'a choice you may make',
-  'proc.tag.required.desc': 'must be done when it applies',
   'demo.boardHint': 'This is a demonstration. Press Next to keep going.',
   'frame.empty': 'Empty board',
   'frame.rooks': 'Rooks',
@@ -655,7 +606,7 @@ window.SQ1_UI = {
   'note.bishop': 'Never. This bishop always stays on dark squares, and e6 is a light square.',
   'quiz.card.kicker': 'Time for a quiz',
   'end.kicker': 'That’s it',
-  'end.title': 'Ready for your first game!',
+  'end.title': 'You’re ready to play.',
   'end.sub': 'Set up the board, let White move first, and take turns.',
   'goal.turns.progress': 'Moves made: {n} of {total}',
   'goal.rotate.corner': 'Bottom-right corner: {shade}',

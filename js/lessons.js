@@ -40,23 +40,6 @@
     { id: 'moving', title: 'part.moving' },
     { id: 'safety', title: 'part.safety' },
     { id: 'special', title: 'part.special', optional: true },
-    { id: 'play', title: 'part.play' },
-  ];
-
-  /* The procedure shown on the "Start here" view. `tag` is how the step behaves. */
-  const PROCEDURE = [
-    { title: 'proc.step.equipment', text: 'proc.equipment', tag: 'order', go: 'equipment' },
-    { title: 'proc.step.setup', text: 'proc.setup', tag: 'order', go: 'setup' },
-    { title: 'proc.step.first', text: 'proc.first', tag: 'order', go: 'turns', board: ['e2e4'] },
-    {
-      title: 'proc.step.turns', text: 'proc.turns', tag: 'repeat', go: 'rook', board: ['e7e5', 'g1f3', 'b8c6'],
-      during: [
-        { title: 'proc.step.check', text: 'proc.check', tag: 'if', tag2: 'required', go: 'check' },
-        { title: 'proc.step.promote', text: 'proc.promote', tag: 'if', tag2: 'required', go: 'promotion' },
-        { title: 'proc.step.special', text: 'proc.special', tag: 'optional', go: 'castling' },
-      ],
-    },
-    { title: 'proc.step.end', text: 'proc.end', tag: 'order', go: 'checkmate' },
   ];
 
   const LESSONS = [
@@ -364,17 +347,6 @@
       ],
     },
 
-    /* ---------------- Play ---------------- */
-    {
-      id: 'play', part: 'play',
-      steps: [
-        { id: 'steps', label: 'step.steps', kind: 'overview', fen: START, mode: 'rules' },
-        {
-          id: 'board', label: 'step.play', kind: 'play', mode: 'rules', sides: 'both', sandbox: true, fen: START, text: ['play.body'], prompt: 'prompt.play',
-          auto: [{ select: 'e2' }, { move: 'e2e4' }, { move: 'e7e5' }],
-        },
-      ],
-    },
   ];
 
   /* Class challenge: one question per key idea, in lesson order. */
@@ -411,8 +383,8 @@
     'overview/map', 'equipment/kit', 'setup/orient', 'setup/squares', 'setup/watch',
     'rook/watch', 'bishop/explore', 'queen/explore', 'king/explore', 'knight/explore', 'pawn/watch', 'turns/try',
     'goal/watch', 'check/watch', 'check/three', 'checkmate/watch', 'draws/watch', 'draws/other',
-    'promotion/watch', 'castling/watch', 'enpassant/watch', 'play/steps', 'play/board',
+    'promotion/watch', 'castling/watch', 'enpassant/watch',
   ];
 
-  root.SQ1.Curriculum = { START, PARTS, PROCEDURE, LESSONS, CHALLENGE, TALK_ROUTE };
+  root.SQ1.Curriculum = { START, PARTS, LESSONS, CHALLENGE, TALK_ROUTE };
 })(typeof window !== 'undefined' ? window : globalThis);

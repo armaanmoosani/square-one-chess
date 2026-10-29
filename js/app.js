@@ -9,7 +9,7 @@
 
   const E = SQ1.Engine;
   const Pieces = SQ1.Pieces;
-  const { PARTS, PROCEDURE, LESSONS, CHALLENGE, TALK_ROUTE } = SQ1.Curriculum;
+  const { PARTS, LESSONS, CHALLENGE, TALK_ROUTE } = SQ1.Curriculum;
   const TALK = new Set(TALK_ROUTE || []);
   const TEXT = window.SQ1_TEXT || {};
   const UI = window.SQ1_UI || {};
@@ -1124,7 +1124,7 @@
     }
   }
 
-  /* ----- Interactive board (explore, tasks, sandbox, overview) ----- */
+  /* ----- Interactive board (explore, tasks) ----- */
   class PlayCtrl extends Ctrl {
     mount() {
       this.mounting = true;
@@ -1436,11 +1436,7 @@
       nodes.push(this.btn.undo = toolButton({ icon: 'undo', label: ui('tool.undo'), keys: 'U', run: () => this.undo() }));
       if (s.goal) nodes.push(this.btn.hint = toolButton({ icon: 'hint', label: ui('tool.hint'), keys: 'H', run: () => this.hint() }));
       if (s.rays) nodes.push(this.btn.lines = toolButton({ icon: 'lines', label: ui('tool.lines'), title: ui('tool.lines.long'), pressed: this.showLines, run: () => { this.showLines = !this.showLines; this.render(); } }));
-      if (s.dangerTool || s.danger || s.sandbox) nodes.push(this.btn.danger = toolButton({ icon: 'danger', label: ui('tool.danger'), title: ui('tool.danger.long'), keys: 'A', pressed: false, run: () => this.toggleDanger() }));
-      if (s.sandbox) {
-        nodes.push(this.btn.moves = toolButton({ icon: 'eye', label: ui('tool.moves'), pressed: true, run: () => { this.showMoves = !this.showMoves; this.render(); } }));
-        nodes.push(toolButton({ icon: 'flip', label: ui('tool.flip'), run: () => { App.board.flip(); this.render(); Feedback.say(ui('play.flipped', { Side: sideName(App.board.orientation) }), 'info'); } }));
-      }
+      if (s.dangerTool || s.danger) nodes.push(this.btn.danger = toolButton({ icon: 'danger', label: ui('tool.danger'), title: ui('tool.danger.long'), keys: 'A', pressed: false, run: () => this.toggleDanger() }));
       setToolbar(nodes);
     }
 
@@ -1456,7 +1452,6 @@
       setDisabled(this.btn.hint, this.locked || this.over);
       setPressed(this.btn.lines, this.showLines);
       setPressed(this.btn.danger, this.showDanger);
-      setPressed(this.btn.moves, this.showMoves);
       setLegend(this.showLines && this.selected != null);
     }
 
@@ -1766,74 +1761,6 @@
       hint(c) { return E.legalMoves(c.pos).find((m) => m.ep) || null; },
     },
   };
-
-  /* ----- Start here: live board beside the step-by-step overview ----- */
-  class OverviewCtrl extends PlayCtrl {
-    mount() {
-      this.step = Object.assign({}, this.step, { sides: 'both', prompt: 'proc.try' });
-      super.mount();
-    }
-    /** Walk through the procedure, playing the first moves on the board as it goes. */
-    async demonstrate(run) {
-      if (this.history.length) { this.reset(false); await pause(run, 500, false); }
-      const flat = [];
-      PROCEDURE.forEach((p) => { flat.push(p); (p.during || []).forEach((d) => flat.push(d)); });
-      const items = [...document.querySelectorAll('#panel-body .proc-item, #panel-body .proc-during > li')];
-      items.forEach((el) => el.classList.remove('spot'));
-      let keep = null;
-      try {
-        for (const [i, el] of items.entries()) {
-          el.classList.add('spot');
-          if (presenterOn() && !mqNarrow.matches) { App.followed = el; keepInView(el, true); }
-          else el.scrollIntoView({ block: 'center', behavior: reducedMotion() ? 'auto' : 'smooth' });
-          const moves = (flat[i] && flat[i].board) || [];
-          // Items without moves name themselves in the caption; the others are captioned by their moves.
-          if (flat[i] && !moves.length) {
-            const n = PROCEDURE.indexOf(flat[i]);
-            Feedback.say(n >= 0 ? ui('proc.item', { n: n + 1, total: PROCEDURE.length, title: ui(flat[i].title) }) : ui('proc.tag.' + flat[i].tag) + ' · ' + ui(flat[i].title), 'info');
-          }
-          await pause(run, 900, false);
-          for (const [j, u] of moves.entries()) await this.perform(run, { move: u, hold: 900 }, j === moves.length - 1);
-          // Stepping by hand, the last item stays lit until → moves on.
-          if (i === items.length - 1 && clickPace()) { keep = el; break; }
-          await pause(run, 1600, i < items.length - 1);
-          el.classList.remove('spot');
-        }
-      } finally {
-        items.forEach((el) => { if (el !== keep) el.classList.remove('spot'); });
-      }
-      this.complete();   // ticked once the walkthrough has reached its last item
-    }
-    selectActions(p) {
-      const L = LESSONS.find((l) => l.piece === E.typeOf(p));
-      return L ? [{ label: ui('overview.learn', { piece: pieceName(p) }), icon: 'arrowRight', run: () => goTo(L.id) }] : [];
-    }
-    panel() {
-      const tagNode = (tag) => h('span', { class: 'tag ' + tag }, icon({ order: 'order', repeat: 'repeat', if: 'branch', optional: 'optional', required: 'alert' }[tag]), ui('proc.tag.' + tag));
-      let n = 0;
-      const item = (p) => h('li', { class: 'proc-item' },
-        h('span', { class: 'proc-num', 'aria-hidden': 'true' }, String(++n)),
-        h('div', { class: 'proc-body' },
-          h('p', { class: 'proc-title' }, h('span', { class: 'sr-only' }, n + '. '), ui(p.title), tagNode(p.tag)),
-          textBlock(p.text),
-          p.during ? h('div', null,
-            h('p', { class: 'kicker' }, ui('proc.during')),
-            h('ul', { class: 'proc-during' }, p.during.map((d) => h('li', null,
-              h('p', { class: 'proc-title' }, ui(d.title), tagNode(d.tag), d.tag2 ? tagNode(d.tag2) : null),
-              textBlock(d.text),
-              h('a', { href: '#' + d.go, class: 'linkish' }, ui('proc.open') + ': ' + ui('lesson.' + d.go)))))) : null,
-          h('a', { href: '#' + p.go, class: 'linkish' }, ui('proc.open') + ': ' + ui('lesson.' + p.go))));
-      return [
-        ...this.textNodes(),
-        h('section', { 'aria-labelledby': 'proc-title' },
-          h('h2', { id: 'proc-title', class: 'section-title' }, ui('proc.title')),
-          h('ol', { class: 'proc' }, PROCEDURE.map(item))),
-        h('div', { class: 'legend-box' },
-          h('p', null, ui('proc.legend')),
-          h('ul', null, ['order', 'repeat', 'if', 'optional', 'required'].map((t) => h('li', null, tagNode(t), ' ', ui('proc.tag.' + t + '.desc'))))),
-      ];
-    }
-  }
 
   /* ----- Look-only board: name pieces, highlight groups ----- */
   class LookCtrl extends Ctrl {
@@ -2350,83 +2277,8 @@
     }
   }
 
-  /* ----- Sandbox: a full game with assists ----- */
-  class SandboxCtrl extends PlayCtrl {
-    mount() {
-      this.sheet = h('div', { class: 'scoresheet' });
-      super.mount();
-      this.complete();
-    }
-    panel() {
-      return [...this.textNodes(), this.widgetEl,
-        h('section', { 'aria-labelledby': 'sheet-title' }, h('h2', { id: 'sheet-title', class: 'section-title' }, ui('play.moves')), this.sheet)];
-    }
-    reset(first) {
-      super.reset(first);
-      this.reps = new Map();
-      this.countRep(this.pos);
-    }
-    countRep(pos) {
-      const k = E.positionKey(pos);
-      this.reps.set(k, (this.reps.get(k) || 0) + 1);
-      return this.reps.get(k);
-    }
-    commit(m) {
-      super.commit(m);
-      if (this.reps) this.countRep(this.pos);
-      this.renderSheet();
-      if (this.over) this.showBanner();
-    }
-    undo(force) {
-      super.undo(force);
-      this.reps = new Map();
-      this.history.forEach((e) => this.countRep(e.pos));
-      this.countRep(this.pos);
-      this.renderSheet();
-    }
-    notices(pos) {
-      const parts = [];
-      if (this.reps && (this.reps.get(E.positionKey(pos)) || 0) + 1 >= 3) parts.push(ui('fb.repetition'));
-      if (pos.halfmove >= 100) parts.push(ui('fb.fifty'));
-      return parts.join(' ');
-    }
-    showBanner() {
-      const st = E.status(this.pos);
-      const title = st.checkmate ? ui('play.over.mate', { Winner: sideName(E.other(this.pos.turn)) }) : st.stalemate ? ui('play.over.stalemate') : ui('play.over.material');
-      const banner = $('#board-banner');
-      banner.replaceChildren(h('h2', null, title), h('div', { class: 'row' },
-        h('button', { type: 'button', class: 'btn primary', onclick: () => this.reset(false) }, icon('reset'), ui('play.newGame')),
-        h('button', { type: 'button', class: 'btn', onclick: () => this.undo(true) }, icon('undo'), ui('tool.undo'))));
-      banner.hidden = false;
-    }
-    renderWidgets(st) {
-      this.widgetEl.replaceChildren(...(st && st.check ? [escapesWidget(this.pos, { onPreview: (k) => this.previewGroup(k), preview: this.previewKind })] : []));
-      if (st && st.check) followWidget(this.widgetEl);
-    }
-    previewGroup(k) {
-      this.previewKind = this.previewKind === k ? null : k;
-      if (!this.previewKind) { this.preview = null; this.render(); return; }
-      const e = E.escapes(this.pos);
-      const o = new Overlay();
-      e.groups[k].forEach((m) => o.arrow(m.from, m.to, 'good'));
-      this.preview = o;
-      this.render();
-    }
-    render() {
-      if (this.preview && !E.inCheck(this.pos)) { this.preview = null; this.previewKind = null; }
-      super.render();
-    }
-    renderSheet() {
-      if (!this.sheet) return;
-      if (!this.history.length) { this.sheet.replaceChildren(h('p', { class: 'empty' }, ui('play.noMoves'))); return; }
-      const scroll = h('div', { class: 'scroll' }, scoreTable(this.history.map((e) => ({ n: e.pos.fullmove, m: e.move }))));
-      this.sheet.replaceChildren(scroll);
-      scroll.scrollTop = scroll.scrollHeight;
-    }
-  }
-
   const CONTROLLERS = {
-    overview: OverviewCtrl, equipment: EquipmentCtrl, demo: DemoCtrl, play: PlayCtrl, rotate: RotateCtrl,
+    equipment: EquipmentCtrl, demo: DemoCtrl, play: PlayCtrl, rotate: RotateCtrl,
     spot: SpotCtrl, classify: ClassifyCtrl, info: InfoCtrl,
   };
 
@@ -2999,7 +2851,7 @@
     if (prevPart && partIdx(L.part) > partIdx(prevPart) && presenterOn()) showPartCard(PARTS[partIdx(L.part)]);
     renderHead();
     const C = CONTROLLERS[S.kind] || PlayCtrl;
-    const ctrl = S.sandbox ? new SandboxCtrl(S, L) : new C(S, L);
+    const ctrl = new C(S, L);
     App.ctrl = ctrl;
     App.board.ctrl = ctrl;
     ctrl.mount();
@@ -3064,7 +2916,6 @@
       if (S.caution) note(S.caution, where);
       (S.frames || []).forEach((f) => { if (f.caption) note(f.caption, where); });
     }));
-    PROCEDURE.forEach((p) => { note(p.text, ui('lesson.overview')); (p.during || []).forEach((d) => note(d.text, ui('lesson.overview'))); });
     CHALLENGE.forEach((q, i) => note(q.explain, ui('ch.title') + ' ' + (i + 1)));
     ['king', 'block', 'capture'].forEach((k) => note('check.ways.' + k, ui('esc.title')));
     const ids = Object.keys(TEXT);
@@ -3446,7 +3297,7 @@
   function buildKeys() {
     const rows = [
       [['Space'], 'keys.demo'], [['←', '→'], 'keys.nav'], [['Shift', '→'], 'keys.skip'],
-      [['G'], 'keys.goto'], [['1', '–', '5'], 'keys.parts'], [['P'], 'keys.presenter'], [['F'], 'keys.focus'],
+      [['G'], 'keys.goto'], [['1', '–', String(PARTS.length)], 'keys.parts'], [['P'], 'keys.presenter'], [['F'], 'keys.focus'],
       [['D'], 'keys.draw'], [['X'], 'keys.clear'], [['C'], 'keys.challenge'], [['A', '–', 'D'], 'keys.vote'], [['R'], 'keys.reveal'],
       [['R'], 'keys.reset'], [['U'], 'keys.undo'], [['A'], 'keys.danger'], [[',', '.'], 'keys.step'],
       [['↑', '↓', '←', '→'], 'keys.board'], [['Enter'], 'keys.select'], [['Esc'], 'keys.cancel'], [['?'], 'keys.help'],
@@ -3475,7 +3326,7 @@
       e.preventDefault();
       return;
     }
-    if (/^[1-5]$/.test(key)) {
+    if (/^[1-9]$/.test(key)) {
       const part = PARTS[Number(key) - 1];
       const L = part && LESSONS.find((x) => x.part === part.id);
       if (L) { userTookOver(); goTo(L.id); }
