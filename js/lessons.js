@@ -154,7 +154,7 @@
       steps: [
         {
           id: 'watch', label: 'step.watch', kind: 'demo', mode: 'free', fen: '8/3p4/8/8/8/2p5/2P1P3/8 w - - 0 1',
-          text: ['pawn.body'], caution: 'pawn.caution',
+          text: ['pawn.body'],
           frames: [
             { label: 'frame.pawn.start', caption: 'pawn.demo.1', movesFrom: 'e2' },
             { move: 'e2e4', label: 'frame.pawn.two', caption: 'pawn.demo.2' },
@@ -165,7 +165,7 @@
         },
         {
           id: 'try', label: 'step.try', kind: 'play', mode: 'drill', movable: 'p', rays: true,
-          fen: '8/8/8/2n5/4pb2/8/1P2P3/8 w - - 0 1', text: ['pawn.body'], caution: 'pawn.caution',
+          fen: '8/8/8/2n5/4pb2/8/1P2P3/8 w - - 0 1', text: ['pawn.body'],
           goal: { type: 'capture', targets: ['c5', 'f4'], par: 4, prompt: 'prompt.captureSome' },
           auto: [{ select: 'b2' }, { attempt: 'b2c3' }, { move: 'b2b4' }, { move: 'b4c5' }, { select: 'e2' }, { attempt: 'e2e4' }, { move: 'e2e3' }, { move: 'e3f4' }],
         },
