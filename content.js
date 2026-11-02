@@ -38,8 +38,8 @@ window.SQ1_TEXT = {
   /* ---------- How to win ---------- */
   'goal.body': { brief: 'Explain what chess is (two players, two armies, taking turns) and how a player wins.', length: '2–3 sentences', text: 'Now, what is checkmate and how do you actually win a game of chess? First, it is important to understand that unlike all the other chess pieces, the king cannot be captured.' },
   'goal.resign': { drafted: true, brief: 'Besides checkmate, how else can a game end in a win? Mention resigning.', length: '1 sentence', text: 'A player can also give up at any time by resigning, and the other player wins.' },
-  'goal.demo.1': { optional: true, drafted: true, brief: 'Caption for the first frame: point out the black king and the white queen.', length: '1 sentence', text: 'White’s queen is on a7 and Black’s king is on g8.' },
-  'goal.demo.2': { optional: true, drafted: true, brief: 'Caption for the last frame: why does this end the game?', length: '1 sentence', text: 'The black king is trapped and can’t escape.' },
+  'goal.demo.1': { optional: true, drafted: true, brief: 'Caption for the first frame: point out the black king and the white queen.', length: '1 sentence', text: 'Watch the white queen and the black king.' },
+  'goal.demo.2': { optional: true, drafted: true, brief: 'Caption for the last frame: why does this end the game?', length: '1 sentence', text: 'The black king has nowhere to go.' },
 
   /* ---------- The board ---------- */
   'board.orientation': { drafted: true, brief: 'Explain how to place the board between the two players, including the rule about the corner square.', length: '1–2 sentences', text: 'Put the board between the two players so each of them has a light square in the bottom-right corner. A good way to remember it is “light on the right.”' },
@@ -49,12 +49,12 @@ window.SQ1_TEXT = {
   /* ---------- Setting up ---------- */
   'setup.body': { drafted: true, brief: 'Describe the starting arrangement from the corners inward, then the pawns. Mention how Black’s side relates to White’s.', length: '2–4 sentences', text: 'Each player sets up on the two rows closest to them. The rooks go in the corners, the knights go next to them, and then the bishops. That leaves two squares in the middle. The queen goes on the one that matches her color (white queen on a light square, black queen on a dark one) and the king goes on the other. The pawns fill the whole row in front. Black sets up the same way on the other side, so the queens face each other and so do the kings.' },
   'setup.caution': { drafted: true, brief: 'CAUTION: the most common setup mistake (hint: the queen and king). Add a memory trick if your group has one.', length: '1 sentence', text: 'The most common mistake is mixing up the king and queen. Remember that the queen starts on a square of her own color.' },
-  'setup.demo.0': { optional: true, drafted: true, brief: 'Caption: the empty board, placed correctly.', length: '1 sentence', text: 'Light on the right: h1 is White’s bottom-right corner and a8 is Black’s.' },
+  'setup.demo.0': { optional: true, drafted: true, brief: 'Caption: the empty board, placed correctly.', length: '1 sentence', text: 'Both players have a light square on their right, h1 and a8.' },
   'setup.demo.1': { optional: true, drafted: true, brief: 'Caption: where the rooks go.', length: '1 sentence', text: 'The rooks go in the corners.' },
   'setup.demo.2': { optional: true, drafted: true, brief: 'Caption: where the knights go.', length: '1 sentence', text: 'The knights go next to the rooks.' },
   'setup.demo.3': { optional: true, drafted: true, brief: 'Caption: where the bishops go.', length: '1 sentence', text: 'The bishops go next to the knights.' },
-  'setup.demo.4': { optional: true, drafted: true, brief: 'Caption: where the queens go.', length: '1 sentence', text: 'Each queen goes on her own color: the white queen on light d1, the black queen on dark d8.' },
-  'setup.demo.5': { optional: true, drafted: true, brief: 'Caption: where the kings go.', length: '1 sentence', text: 'Each king goes on the last empty square, next to its queen.' },
+  'setup.demo.4': { optional: true, drafted: true, brief: 'Caption: where the queens go.', length: '1 sentence', text: 'The white queen goes on light d1 and the black queen on dark d8.' },
+  'setup.demo.5': { optional: true, drafted: true, brief: 'Caption: where the kings go.', length: '1 sentence', text: 'The kings take the last square, next to the queens.' },
   'setup.demo.6': { optional: true, drafted: true, brief: 'Caption: where the pawns go.', length: '1 sentence', text: 'The pawns fill the row in front.' },
 
   /* ---------- Taking turns ---------- */
@@ -64,7 +64,7 @@ window.SQ1_TEXT = {
   /* ---------- Moving and capturing ---------- */
   'moving.body': { brief: 'Rules shared by every piece: one piece moves per turn, where a piece may not land, how a capture works, and whether a player is ever forced to capture.', length: '2–3 sentences', text: 'Each chess piece moves in its own way, so learning how they move is an important part of understanding the game. Some pieces can move across the board, while others have more limited movements.' },
   'rook.body': { brief: 'How does the rook move and capture? Which directions, how far, and what stops it?', length: '1–2 sentences', text: 'Each player starts with two rooks, which are placed in the corners of the board. The rook is usually shaped like a small castle.\n\nHow it moves: A rook can move any number of squares horizontally or vertically, as long as its path is clear. It can’t move diagonally or jump over other pieces.\n\nHow it captures: A rook captures an opponent\'s piece by moving along a row or column to the square where that piece is located.' },
-  'rook.demo.1': { optional: true, drafted: true, brief: 'Caption: the rook’s lines are drawn on the board.', length: '1 sentence', text: 'The lines show where the rook can go: along its row and up its column.' },
+  'rook.demo.1': { optional: true, drafted: true, brief: 'Caption: the rook’s lines are drawn on the board.', length: '1 sentence', text: 'The rook can go along its row or up its column.' },
   'rook.demo.2': { optional: true, brief: 'Caption: the rook has moved; point out the piece it cannot pass.', length: '1 sentence', text: 'You cannot move your piece to a square where a friendly piece is positioned.' },
   'rook.demo.3': { optional: true, brief: 'Caption: the rook captures the knight.', length: '1 sentence', text: 'If a piece moves to a square where an enemy piece is currently positioned, then the enemy piece is captured i.e. it is placed off to the side and removed from the game for the rest of play.' },
   'bishop.body': { brief: 'How does the bishop move and capture? Mention which color of square it can ever reach.', length: '1–2 sentences', text: 'Each player starts with two bishops. One begins on a light-colored square, and the other begins on a dark-colored square.\n\nHow it moves: As long as the bishop\'s path is clear it\'s able to travel diagonally within a number of squares. It isn\'t allowed to move horizontally or vertically. The bishop isn\'t allowed to jump over other pieces.\n\nHow it captures: When a bishop moves diagonally onto a square where an opponent\'s piece is placed the bishop is allowed to capture it.\n\nA bishop stays on the same color squares throughout the duration of the game.' },
@@ -75,10 +75,10 @@ window.SQ1_TEXT = {
   'pawn.special': { optional: true, brief: 'Not shown (kept for reference): the pawn section\'s en passant and promotion paragraphs. The same paragraphs explain the En passant and Promotion lessons.', length: '1 paragraph', text: 'Special rule:\n\nEn passant: En passant is a special pawn capture. If an opponent moves a pawn forward two squares from its starting position and lands beside one of your pawns, you can capture it as though it had moved forward only one square. Your pawn moves diagonally to the square the opponent’s pawn passed over, and the opponent’s pawn is removed from the board. This capture must be made immediately on your next move, or the opportunity is lost.\n\nPromotion: If a pawn reaches the opposite end of the board, it can be promoted to a queen, rook, bishop, or knight. Most players choose a queen because it can move in more directions than the other pieces.' },
   'knight.body': { brief: 'Describe the knight’s L-shaped move and what makes it different from every other piece.', length: '1–2 sentences', text: 'Each player starts with two knights, which are usually shaped like horses. The knight is different from the other pieces because it can jump over other pieces.\n\nHow it moves: A knight moves in an L-shape. It moves two squares in one direction and then one square to the side.\n\nHow it captures: A knight captures an opponent\'s piece by landing on the square where that piece is located. It doesn’t capture pieces that it jumps over.' },
   'pawn.body': { brief: 'Explain pawn movement: direction, normal distance, the first-move option, and how its capture differs from its move.', length: '2–3 sentences', text: 'Each player starts with eight pawns. They are placed in the row in front of the other pieces.\n\nHow it moves: Pawns usually move forward one square at a time. On their first move, they can move forward two squares instead, as long as both squares are empty. Pawns can’t move backward.\n\nHow it captures: Pawns capture differently from how they move. Instead of capturing a piece directly in front of them, they capture an opponent\'s piece one square diagonally forward. If another piece is directly in front of a pawn, it can’t move forward until that square is clear.' },
-  'pawn.demo.1': { optional: true, drafted: true, brief: 'Caption: the white pawn on e2 has not moved yet. Its possible moves are marked.', length: '1 sentence', text: 'This pawn hasn’t moved yet, so it can go one or two squares forward.' },
-  'pawn.demo.2': { optional: true, drafted: true, brief: 'Caption: White uses the first-move option.', length: '1 sentence', text: 'On its first move it goes two squares.' },
-  'pawn.demo.3': { optional: true, drafted: true, brief: 'Caption: White captures diagonally.', length: '1 sentence', text: 'Pawns capture one square diagonally forward.' },
-  'pawn.demo.4': { optional: true, drafted: true, brief: 'Caption: the pawn on c2 is stuck. Why?', length: '1 sentence', text: 'The pawn on c2 is stuck, because the black pawn on c3 is right in front of it.' },
+  'pawn.demo.1': { optional: true, drafted: true, brief: 'Caption: the white pawn on e2 has not moved yet. Its possible moves are marked.', length: '1 sentence', text: 'This pawn hasn’t moved yet, so it can go one or two squares.' },
+  'pawn.demo.2': { optional: true, drafted: true, brief: 'Caption: White uses the first-move option.', length: '1 sentence', text: 'It goes two squares on its first move.' },
+  'pawn.demo.3': { optional: true, drafted: true, brief: 'Caption: White captures diagonally.', length: '1 sentence', text: 'Pawns capture diagonally.' },
+  'pawn.demo.4': { optional: true, drafted: true, brief: 'Caption: the pawn on c2 is stuck. Why?', length: '1 sentence', text: 'The pawn on c2 is stuck behind the black pawn on c3.' },
 
   /* ---------- Check ---------- */
   'check.body': { brief: 'Define check in plain words.', length: '1–2 sentences', text: 'If an enemy piece is in a square where it could “capture” your king the next turn(we say that the enemy piece is “attacking” the king), then you are required to move your king on your next turn. You must either:\n\n* move your king to a square that is not under attack by enemy pieces\n* put a piece in between the king and the piece attacking it, or\n* capture the piece attacking your king.\n\nA good way to understand this rule is to think that you have to move your king so that your opponent will not be able to capture it on their next turn.' },
@@ -88,15 +88,18 @@ window.SQ1_TEXT = {
   'check.caution': { drafted: true, brief: 'CAUTION: what moves are never allowed where your own king is concerned? Also say whether a king is ever actually captured.', length: '1–2 sentences', text: 'You can never make a move that leaves your own king in check, and that includes moving your king onto a square that\'s under attack. The king never actually gets taken off the board. The game ends with checkmate before that can happen.' },
   'check.demo.1': { optional: true, drafted: true, brief: 'Caption: Black is about to move the rook.', length: '1 sentence', text: 'Watch the black rook on a8.' },
   'check.demo.2': { optional: true, brief: 'Caption: the white king is now in check. What does White have to do?', length: '1 sentence', text: '' },
+  'check.demo.3': { optional: true, drafted: true, brief: 'Caption: the king steps out of check.', length: '1 sentence', text: 'The king can step to one of the marked squares.' },
+  'check.demo.4': { optional: true, drafted: true, brief: 'Caption: a piece blocks the line.', length: '1 sentence', text: 'A piece can move to e2 and block the rook.' },
+  'check.demo.5': { optional: true, drafted: true, brief: 'Caption: the attacker is captured.', length: '1 sentence', text: 'The bishop can capture the rook on e8.' },
 
   /* ---------- Checkmate ---------- */
   'mate.body': { brief: 'Define checkmate, linking it to the three ways out of check.', length: '1–2 sentences', text: 'Now, you are ready to understand checkmate. Checkmate is when you are in check(so some piece is attacking your king) and there is no way to get your king out of check, to a square where it is not under attack. In other words, you are checkmated when, no matter what you do, your opponent would be able to “capture” your king on their next turn. When one player puts the other player’s king in checkmate, they win the game.' },
-  'mate.demo.1': { optional: true, drafted: true, brief: 'Caption: look at Black’s king and its own pawns.', length: '1 sentence', text: 'Black’s king is boxed in by its own pawns on f7, g7 and h7.' },
-  'mate.demo.2': { optional: true, drafted: true, brief: 'Caption: why is this checkmate? Use the "Ways out" panel.', length: '1 sentence', text: 'The king is in check and none of the three ways out works.' },
+  'mate.demo.1': { optional: true, drafted: true, brief: 'Caption: look at Black’s king and its own pawns.', length: '1 sentence', text: 'Black’s own pawns are boxing in the king.' },
+  'mate.demo.2': { optional: true, drafted: true, brief: 'Caption: why is this checkmate? Use the "Ways out" panel.', length: '1 sentence', text: 'The king is in check and can’t get out of it.' },
 
   /* ---------- Stalemate and draws ---------- */
   'stalemate.body': { brief: 'Define stalemate, give its result, and say how it differs from checkmate.', length: '2 sentences', text: 'Another, less common outcome of a chess game is stalemate. This occurs when one player has no legal moves to make and is also not in check. If a game ends in stalemate, then it is a draw.' },
-  'stalemate.demo.1': { optional: true, drafted: true, brief: 'Caption: White is about to move the queen. Watch what Black can do afterwards.', length: '1 sentence', text: 'Black’s king is in the corner with very little room.' },
+  'stalemate.demo.1': { optional: true, drafted: true, brief: 'Caption: White is about to move the queen. Watch what Black can do afterwards.', length: '1 sentence', text: 'Black’s king is in the corner.' },
   'draws.body': { drafted: true, brief: 'At a beginner level, explain what a draw is and that it can happen in several ways.', length: '1–2 sentences', text: 'A draw means nobody wins. Stalemate is one kind of draw, but there are a few others too.' },
   'draws.agreement': { drafted: true, brief: 'Draw by agreement.', length: '1 sentence', text: 'The two players can also just agree to call it a draw.' },
   'draws.material': { drafted: true, brief: 'Draw when neither side has enough pieces left to checkmate (the first frame shows king against king).', length: '1 sentence', text: 'If neither side has enough pieces left to checkmate, like when only the two kings are left, the game is a draw.' },
@@ -104,21 +107,21 @@ window.SQ1_TEXT = {
 
   /* ---------- Promotion ---------- */
   'promotion.body': { brief: 'Explain promotion: when it happens, what the pawn may become, and whether the player has to promote.', length: '2 sentences', text: 'Promotion: If a pawn reaches the opposite end of the board, it can be promoted to a queen, rook, bishop, or knight. Most players choose a queen because it can move in more directions than the other pieces.' },
-  'promotion.demo.1': { optional: true, drafted: true, brief: 'Caption: the white pawn is one step from the far side.', length: '1 sentence', text: 'White’s pawn on e7 is one step from the far side.' },
+  'promotion.demo.1': { optional: true, drafted: true, brief: 'Caption: the white pawn is one step from the far side.', length: '1 sentence', text: 'This pawn is one step from the end of the board.' },
 
   /* ---------- Castling ---------- */
   'castling.body': { brief: 'Explain what castling does: which two pieces move in one turn, and where they end up.', length: '1–2 sentences', text: 'Castling is a special move that is available to both players once per game under certain special conditions. A player can castle their king with either of their rooks.' },
   'castling.conditions': { brief: 'List every condition that must be true to castle, as a bulleted list (start each line with "- ").', length: '4–6 bullets', text: 'For one player to castle, there must be no pieces between the king and the rook they wish to castle with. Additionally, to castle, the player must not have moved either their king or the rook they wish to castle with the whole game. Watch the board to see how the king and the rook move when castling.' },
   'castling.caution': { drafted: true, brief: 'CAUTION: the castling condition beginners forget most often.', length: '1 sentence', text: 'You can\'t castle while your king is in check, and the king can\'t pass through or land on a square that is under attack.' },
-  'castling.demo.1': { optional: true, drafted: true, brief: 'Caption: both sides are ready to castle. Point out the checklist.', length: '1 sentence', text: 'Nothing stands between the kings and the rooks, and none of them has moved yet.' },
+  'castling.demo.1': { optional: true, drafted: true, brief: 'Caption: both sides are ready to castle. Point out the checklist.', length: '1 sentence', text: 'Nothing is in the way, and none of these pieces has moved yet.' },
   'castling.demo.2': { optional: true, brief: 'Caption: White has castled on the kingside (short side).', length: '1 sentence', text: '' },
   'castling.rights.1': { optional: true, brief: 'Caption: White could castle on either side right now. Point at the checklist.', length: '1 sentence', text: '' },
   'castling.rights.2': { optional: true, brief: 'Caption: the king walked away and came back to e1. Why can it never castle again?', length: '1 sentence', text: '' },
 
   /* ---------- En passant ---------- */
   'ep.body': { brief: 'Explain en passant: which pawn move makes it possible, how the capture is made, and where the capturing pawn lands.', length: '2–3 sentences', text: 'En passant: En passant is a special pawn capture. If an opponent moves a pawn forward two squares from its starting position and lands beside one of your pawns, you can capture it as though it had moved forward only one square. Your pawn moves diagonally to the square the opponent’s pawn passed over, and the opponent’s pawn is removed from the board. This capture must be made immediately on your next move, or the opportunity is lost.' },
-  'ep.demo.1': { optional: true, drafted: true, brief: 'Caption: Black is about to move a pawn two squares.', length: '1 sentence', text: 'Black is about to move the pawn on d7 two squares.' },
-  'ep.demo.2': { optional: true, drafted: true, brief: 'Caption: the black pawn landed beside White’s pawn. What can White do right now?', length: '1 sentence', text: 'It lands right beside White’s pawn on e5.' },
+  'ep.demo.1': { optional: true, drafted: true, brief: 'Caption: Black is about to move a pawn two squares.', length: '1 sentence', text: 'Black is about to move this pawn two squares.' },
+  'ep.demo.2': { optional: true, drafted: true, brief: 'Caption: the black pawn landed beside White’s pawn. What can White do right now?', length: '1 sentence', text: 'It lands right next to White’s pawn.' },
 
 
   /* ---------- Class challenge answer explanations ---------- */
@@ -189,6 +192,9 @@ window.SQ1_UI = {
   'kit.pieces.detail': '32 pieces, 16 for each player',
   'kit.opponent': 'An opponent',
   'kit.opponent.detail': 'Or play both sides to practice',
+  'kit.say.board': 'First, a chessboard.',
+  'kit.say.pieces': 'Then the pieces.',
+  'kit.say.opponent': 'And someone to play against.',
   'kit.count.title': 'Each player starts with',
   'kit.count.hint': 'Each kind of piece is highlighted on the board in turn.',
   'kit.count.found': 'Each player has {count} {name}{plural}. They’re highlighted on the board.',
@@ -316,11 +322,11 @@ window.SQ1_UI = {
   'why.own': 'A piece can’t land on a square held by its own side.',
   'why.kingCapture': 'Kings are never captured.',
   'why.pattern': 'The {piece} on {from} can’t reach {to} in one move. Its moves are marked.',
-  'why.pattern.r': 'Rooks move only in straight lines along rows and columns, so the rook on {from} can’t reach {to}.',
-  'why.pattern.b': 'Bishops move only diagonally, so the bishop on {from} can’t reach {to}.',
-  'why.pattern.q': 'The queen moves only in straight lines and diagonals, so it can’t reach {to} from {from}.',
-  'why.pattern.k': 'The king moves only one square at a time, so it can’t reach {to} from {from}.',
-  'why.pattern.n': 'Knights move only in an L-shape, so the knight on {from} can’t reach {to}.',
+  'why.pattern.r': 'Rooks only move in straight lines, so it can’t get to {to}.',
+  'why.pattern.b': 'Bishops only move diagonally, so it can’t get to {to}.',
+  'why.pattern.q': 'The queen only moves in straight lines and diagonals, so it can’t get to {to}.',
+  'why.pattern.k': 'The king only moves one square at a time, so it can’t get to {to}.',
+  'why.pattern.n': 'Knights only move in an L-shape, so it can’t get to {to}.',
   'why.blocked': 'The {blocker} on {blockerSq} is in the way. Only the knight can jump over pieces.',
   'why.pawnBackward': 'Pawns only move forward.',
   'why.pawnBlocked': 'The {blocker} on {to} blocks this pawn. Pawns can’t capture straight ahead.',

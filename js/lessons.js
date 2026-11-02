@@ -204,9 +204,9 @@
           frames: [
             { label: 'frame.blackToMove', caption: 'check.demo.1', highlight: ['a8'] },
             { move: 'a8e8', label: 'frame.check', caption: 'check.demo.2' },
-            { label: 'frame.way.king', show: 'king', ask: 'ask.checkWays' },
-            { label: 'frame.way.block', show: 'block' },
-            { label: 'frame.way.capture', show: 'capture' },
+            { label: 'frame.way.king', caption: 'check.demo.3', show: 'king', ask: 'ask.checkWays' },
+            { label: 'frame.way.block', caption: 'check.demo.4', show: 'block' },
+            { label: 'frame.way.capture', caption: 'check.demo.5', show: 'capture' },
           ],
         },
         {

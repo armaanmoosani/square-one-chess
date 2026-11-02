@@ -1840,6 +1840,7 @@
       for (const li of rows) {
         li.classList.add('spot');
         bringIntoView(li);
+        Feedback.say(ui('kit.say.' + li.querySelector('input').id.replace('kit-', '')), 'info');
         await pause(run, 800);
         li.classList.remove('spot');
       }
