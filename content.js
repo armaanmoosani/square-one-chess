@@ -4,7 +4,7 @@
  *
  * This is the only file you need to edit to write the guide.
  *
- * SECTION A — GROUP-AUTHORED EXPLANATIONS  (your group writes these)
+ * SECTION A — GROUP-AUTHORED EXPLANATIONS  (your group writes these) 
  *   Each entry has a `brief` (what to write) and an empty `text`.
  *   While `text` is empty, the site shows a dashed "Group text needed" box
  *   with the brief, so nothing missing can slip into the presentation.
