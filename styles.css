@@ -740,3 +740,44 @@ html.focus-board .board-col > #feedback-mobile-slot { max-width: min(100%, 900px
   .promo-grid svg.piece-svg { width: 48px; height: 48px; }
   .brand-name { font-size: 1.25rem; }
 }
+
+body[data-view="guide"] .board-col,
+body[data-view="guide"] #feedback,
+body[data-view="guide"] .deckbar {
+  display: none;
+}
+
+body[data-view="guide"] .stage {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "head"
+    "panel";
+  grid-template-rows: auto auto;
+  max-width: 1000px;
+}
+
+body[data-view="guide"] .panel {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+body[data-view="guide"] .full-guide {
+  display: grid;
+  gap: 28px;
+}
+
+body[data-view="guide"] .full-guide-section {
+  border-top: 1px solid var(--rule);
+  padding-top: 22px;
+}
+
+body[data-view="guide"] .full-guide-section h2 {
+  font-size: 1.55rem;
+  margin-bottom: 12px;
+}
+
+body[data-view="guide"] .full-guide-section .prose {
+  max-width: 80ch;
+  line-height: 1.7;
+}
