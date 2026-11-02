@@ -95,7 +95,7 @@
           text: ['moving.body', 'rook.body'],
           frames: [
             { label: 'frame.rook.lines', caption: 'rook.demo.1', rays: 'a1' },
-            { move: 'a1a5', label: 'frame.rook.move', caption: 'rook.demo.2', rays: 'a5' },
+            { move: 'a1a5', label: 'frame.rook.move', caption: 'rook.demo.2', rays: 'a5', highlight: ['a6'] },
             { move: 'a5e5', label: 'frame.capture', caption: 'rook.demo.3', ask: 'ask.rookCapture' },
           ],
         },
@@ -202,7 +202,7 @@
           id: 'watch', label: 'step.watch', kind: 'demo', mode: 'rules', fen: 'r6k/8/8/1B6/8/8/8/4K1N1 b - - 0 1',
           text: ['check.body'], caution: 'check.caution', widget: 'escapes',
           frames: [
-            { label: 'frame.blackToMove', caption: 'check.demo.1' },
+            { label: 'frame.blackToMove', caption: 'check.demo.1', highlight: ['a8'] },
             { move: 'a8e8', label: 'frame.check', caption: 'check.demo.2' },
             { label: 'frame.way.king', show: 'king', ask: 'ask.checkWays' },
             { label: 'frame.way.block', show: 'block' },
@@ -243,7 +243,7 @@
           id: 'watch', label: 'step.watch', kind: 'demo', mode: 'rules', fen: 'k7/8/1K6/2Q5/8/8/8/8 w - - 0 1',
           text: ['stalemate.body'], widget: 'matrix',
           frames: [
-            { label: 'frame.whiteToMove', caption: 'stalemate.demo.1' },
+            { label: 'frame.whiteToMove', caption: 'stalemate.demo.1', highlight: ['a8'] },
             { move: 'c5c7', label: 'frame.stalemate', caption: null, trapped: true, ask: 'ask.stalemate' },
           ],
         },
@@ -293,7 +293,7 @@
           id: 'watch', label: 'step.watch', kind: 'demo', mode: 'rules', fen: 'r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1',
           text: ['castling.body', 'castling.conditions'], caution: 'castling.caution', widget: 'castling',
           frames: [
-            { label: 'frame.castle.ready', caption: 'castling.demo.1' },
+            { label: 'frame.castle.ready', caption: 'castling.demo.1', highlight: ['a1', 'e1', 'h1', 'a8', 'e8', 'h8'] },
             { move: 'e1g1', label: 'frame.castle.white', caption: 'castling.demo.2' },
             { move: 'e8c8', label: 'frame.castle.black', caption: null },
           ],
@@ -332,7 +332,7 @@
           id: 'watch', label: 'step.watch', kind: 'demo', mode: 'rules', fen: '4k3/3p4/8/4P3/8/8/8/4K3 b - - 0 1',
           text: ['ep.body'],
           frames: [
-            { label: 'frame.blackToMove', caption: 'ep.demo.1' },
+            { label: 'frame.blackToMove', caption: 'ep.demo.1', highlight: ['d7'] },
             { move: 'd7d5', label: 'frame.ep.jump', caption: 'ep.demo.2', movesFrom: 'e5' },
             { move: 'e5d6', label: 'frame.ep', caption: null, ask: 'ask.ep' },
           ],
@@ -381,7 +381,7 @@
   /* The 15-minute talk: the one step per topic that → visits while presenting (the rest stay reachable with Go to). */
   const TALK_ROUTE = [
     'overview/map', 'equipment/kit', 'setup/orient', 'setup/squares', 'setup/watch',
-    'rook/watch', 'bishop/explore', 'queen/explore', 'king/explore', 'knight/explore', 'pawn/watch', 'turns/try',
+    'rook/watch', 'bishop/explore', 'queen/explore', 'king/try', 'knight/explore', 'pawn/watch', 'turns/try',
     'goal/watch', 'check/watch', 'check/three', 'checkmate/watch', 'draws/watch', 'draws/other',
     'promotion/watch', 'castling/watch', 'enpassant/watch',
   ];

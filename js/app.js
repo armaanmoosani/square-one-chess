@@ -245,7 +245,7 @@
         const fail = ex.report.conditions.find((c) => !c.ok);
         return ui('why.castle', { sideName: ui('castle.side.' + ex.report.side), reason: castleReason(pos, fail) });
       }
-      default: return ui('why.pattern', v);
+      default: return p && E.typeOf(p) !== 'p' ? ui('why.pattern.' + E.typeOf(p), v) : ui('why.pattern', v);
     }
   }
 
